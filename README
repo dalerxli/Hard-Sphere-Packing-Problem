@@ -1,0 +1,7 @@
+This project is about finding the packing fraction of spheres when their centres are bounded by a cell and collisions occur with the cell boundaries and other spheres.
+
+The spheres are growing in size with respect to time.
+
+The entire system has a periodic boundary.
+
+Currently it doesn't run very fast and I want figure out why.
