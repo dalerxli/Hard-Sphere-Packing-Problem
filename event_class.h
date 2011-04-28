@@ -47,6 +47,10 @@ namespace kspace {
 			sphere_count++;
 		}
 
+		void reset() {
+			sphere_count = 1;
+		}
+
 		//get methods
 		double get_time() const {
 			return time;
