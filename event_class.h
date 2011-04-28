@@ -9,21 +9,23 @@ namespace kspace {
 	class cEvent {
 		double time; //the at which the event occurs
 		int sphere_count; //the number of spheres involved
-		int **ids; //the ids of the spheres involved (the first id is for the primary sphere)
+		int ids[27][3]; //the ids of the spheres involved (the first id is for the primary sphere)
 		int event_counts[27]; //the number of events the associated sphere had had at the time of event creation
 	public:
 		
 		cEvent() {
 			time = 0; //set the time to zero
 			sphere_count = 0; //set the number of spheres involved to zero
-
+/*
 			//create a 2d array to store the ids in (max number of spheres involved in an event is 27)
 			ids = new int*[27];
 			for(int a = 0; a < 27; a++) {
 				ids[a] = new int[3];
 			}
+*/
 		}
 
+/*
 		~cEvent() {
 			for(int a = 0; a < 27; a++) {
 				delete [] ids[a];
@@ -31,6 +33,7 @@ namespace kspace {
 
 			delete [] ids;
 		}
+*/
 
 		//add methods
 		void set_time(const double t) {

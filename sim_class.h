@@ -110,20 +110,32 @@ sim::sim(double end_time, double time_step_size, double initial_diameter, double
 	spheres.resize(dim[0]*dim[1]*dim[2]);
 
 	srand((int) time(NULL) + clock() + rand());
+
+	double x, y, z;
+
 	for(int a = 0; a < dim[0]; a++) {
 		for(int b = 0; b < dim[1]; b++) {
 			for(int c = 0; c < dim[2]; c++) {
 				sphere &s = get_sphere(a, b, c);
 				s.set_id(a, b, c);
-				s.set_pos((a + 0.5)*cell_dim[0], (b + 0.5)*cell_dim[1], (c + 0.5)*cell_dim[2]);
+				x = 0.5 + ((a - 0.5*(b%2))*(1 - c%2) + (a - 0.5*(1 - b%2))*(c%2))*cell_dim[0];
+				y = 0.5 + ((b*sqrt(3.)/2)*(1 - c%2) + (1/(2*sqrt(3.)))*(c%2))*cell_dim[1];
+				z = 0.5 + c*sqrt((double)2/3)*cell_dim[3];
+				cout << "[" << a << ", " << b << ", " << c << "]" << endl;
+				cout << "(" << b%2 << ", " << c%2 << ")" << endl;
+				cout << "[" << x << ", " << y << ", " << z << "]" << endl;
+				s.set_pos(x, y, z);
 				s.set_vel((double) (rand()%1000) / 1000, (double) (rand()%1000) / 1000, (double) (rand()%1000) / 1000);
 				s.set_lower_clim(a, b, c);
 				s.set_upper_clim(a+1, b+1, c+1);
 				s.set_lower_lim(a*cell_dim[0], b*cell_dim[1], c*cell_dim[2]);
 				s.set_upper_lim((a+1)*cell_dim[0], (b+1)*cell_dim[1], (c+1)*cell_dim[2]);
+				pause();
 			}
 		}
 	}
+
+	save("init_state.txt");
 }
 
 sim::~sim() {
